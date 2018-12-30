@@ -16,14 +16,16 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image1]: ./report_images/01_eda.png "eda"
+[image2]: ./report_images/02_class_distribution.png     "class_distribution"
+[image3]: ./report_images/03_undistorted.png "undistorted"
+[image4]: ./report_images/04_distorted.png "distorted"
+[image5]: ./report_images/05_random_noise.png "random_noise"
+[image6]: ./report_images/06_invert_color.png "invert_color"
+[image7]: ./report_images/07_horizontal_flip.png "horizontal_flip"
+[image8]: ./report_images/08_blurred_image.png "blurred_image"
+[image9]: ./report_images/09_model_architecture.jpg "model_architecture"
+[image10]: ./report_images/10_lenet.jpg "model architecture diagram"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -52,75 +54,80 @@ I used the numpy library to calculate summary statistics of the traffic signs da
 
 Here is an exploratory visualization of the data set. 
 The code for this step is contained in the fourth code cell of the IPython notebook.
+![alt text][image1]
 
 It is a bar chart showing how the data ...
 
-![alt text][image1]
+![alt text][image2]
 
 ### Design and Test a Model Architecture
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because ...
+The code for this step is contained in the fifth code cell of the IPython notebook.
 
-Here is an example of a traffic sign image before and after grayscaling.
+My preprocessing pipeline consists of the following steps:
 
-![alt text][image2]
+1. Conversion to grayscale: It didn't significantly change the accuracy, but it made it easier to do the normalization.
+2. Saturating the intensity values at 1 and 99 percentile.
+3. Min/max normalization to the [0, 1] range.
+4. Subtraction of its mean from the image, making the values centered around 0 and in the [-1, 1] range.
+5. Apply random noise.
+6. Invert the color of the images.
+7. Horizontal flipping of images
+8. Blurring of images.
 
-As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
+The undistorted image as below,
 ![alt text][image3]
 
-The difference between the original data set and the augmented data set is the following ... 
+After applying steps 1 to 4 above, the distorted image as below,
+![alt text][image4]
 
+Random noise:
+![alt text][image5]
+
+Invert color:
+![alt text][image6]
+
+Horizontal flip:
+![alt text][image7]
+
+Blurred image:
+![alt text][image8]
+
+
+With a simple min/max normalization I had (approx.) 1% better validation-accuracies than without it. The percentile-based method gave an additional (approx.) 1% improvement over simple min/max normalization (this method was mentioned in [3]). 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-My final model consisted of the following layers:
+The code for my final model is located in the seventh cell of the ipython notebook.
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+My architecture is a deep convolutional neural network inspired by two existing architectures: one is LeNet[1], and the other is the one in Ciresan's paper[3]. Its number and types of layers come from LeNet, but the relatively huge number of filters in convolutional layers came for Ciresan. Another important property of Ciresan's network is that it is multi-column, but my network contains only a single column. It makes it a little less accurate, but the training and predition is much faster.
+
+The model architecture diagram as below,
+![alt text][image10]
+
+The final model consisted of the following layers:
+![alt text][image9]
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+The code for training the model is located in the eleventh cell of the ipython notebook.
+
+To train the model, I used AdamOptimizer, a batch size of 128, at most 30 epochs, a learn rate of 0.001. Another hyperparameter was the dropout rate which was 0.7 at every place where I used it. I have tried changing these parameters but it didn't really increase the accuracy. I saved the model which had the best validation accuracy.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
+The code for calculating the accuracy of the model is located in the twelfth cell of the Ipython notebook.
+
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+training set accuracy of 0.999
+validation set accuracy of 0.983
+test set accuracy of 0.971
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+I started out by creating an architecture which could clearly overfit the training data. (It converged to 1.0 training-accuracy in a couple of epochs, but the validation accuracy was much lower. Then I have added regulators until the overfitting was more-or-less eliminated. I added dropout operations between the fully connected layers. I also tried L2 regularization for the weights (in addition to the dropout), but it made the accuracy worse by a tiny amount. Then I have kept removing filters up to the point when the accuracy started decreasing.
 
 ### Test a Model on New Images
 
