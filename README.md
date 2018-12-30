@@ -35,6 +35,16 @@ The goals / steps of this project are the following:
 [image15]: ./new_test_images/dangerous-turn-to-the-left.jpg
 [image16]: ./report_images/11_5images_prediction.png
 
+[image17]: ./report_images/12_prediction_1.JPG
+[image18]: ./report_images/13_prediction_2.JPG
+[image19]: ./report_images/14_prediction_3.JPG
+[image20]: ./report_images/15_prediction_4.JPG
+[image21]: ./report_images/16_prediction_5.JPG
+[image22]: ./report_images/17_cnn1.png
+[image23]: ./report_images/18_cnn2.png
+[image24]: ./report_images/19_cnn3.png
+
+
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
@@ -131,9 +141,9 @@ The code for calculating the accuracy of the model is located in the twelfth cel
 
 My final model results were:
 
-training set accuracy of 0.994
-validation set accuracy of 0.978
-test set accuracy of 0.964
+training set accuracy of 0.991
+validation set accuracy of 0.980
+test set accuracy of 0.961
 
 I started out by creating an architecture which could clearly overfit the training data. (It converged to 1.0 training-accuracy in a couple of epochs, but the validation accuracy was much lower. Then I have added regulators until the overfitting was more-or-less eliminated. I added dropout operations between the fully connected layers. I also tried L2 regularization for the weights (in addition to the dropout), but it made the accuracy worse by a tiny amount. Then I have kept removing filters up to the point when the accuracy started decreasing.
 
@@ -163,26 +173,43 @@ Here are the results of the prediction:
 
 ![alt text][image16] <br/>
 
-The model was able to correctly guess 2 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%.
+This is lower than the test accuracy of 96.1%, however I would not draw conclusions from this very small (5 images) dataset.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 23rd cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is very confident (99.2%), and correct. The top five soft max probabilities were:<br/>
+![alt text][image17] <br/><br/>
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+For the second image, the model is relatively sure (27%) that we are looking at a "Dangerous curve to the right " sign , but the correct answer is No passing which was not even in the top five guesses. Maybe the image was too skewed.<br/>
+![alt text][image18] <br/><br/>
 
+For the third image, the model is completely confident (100%), and correct.<br/>
+![alt text][image19] <br/><br/>
 
-For the second image ... 
+For the fourth image, the model is relatively sure (18%), and correct.<br/>
+![alt text][image20] <br/><br/>
+
+For the fifth image, the model is very sure (95.16%) that it is a Bumpy road sign, but the correct answer is Dangerous curve to the left, which was not even in the top five guesses.<br/>
+![alt text][image21] <br/><br/>
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+In the visualization of the activations of the first convolutional layer, I have seen that different feature maps look for different edges, for example the 7th feature map is activated by diagonal edges, and the 8th feature map is activated by horizontal edges.
+
+![alt text][image22] <br/><br/>
+![alt text][image23] <br/><br/>
+![alt text][image24] <br/><br/>
+
+Reference
+[1] Lecun(1998): Gradient-Based Learning Applied to Document Recognition
+
+[2] Sermanet(2011): Traffic Sign Recognition with Multi-Scale Convolutional Networks
+
+[3] Ciresan (2012): Multi-Column Deep Neural Network for Traffic Sign Classification
+
+[4] https://www.kaggle.com/tomahim/image-manipulation-augmentation-with-skimage
 
