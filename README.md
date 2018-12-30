@@ -25,7 +25,7 @@ The goals / steps of this project are the following:
 [image7]: ./report_images/07_horizontal_flip.png "horizontal_flip"
 [image8]: ./report_images/08_blurred_image.png "blurred_image"
 [image9]: ./report_images/09_model_architecture.jpg "model_architecture"
-[image10]: ./report_images/10_lenet.jpg "model architecture diagram"
+[image10]: ./report_images/10_lenet.jpeg "model architecture diagram"
 
 
 [image11]: ./new_test_images/end-of-all-speed-limits.jpg  
@@ -33,6 +33,7 @@ The goals / steps of this project are the following:
 [image13]: ./new_test_images/road-work.jpg  
 [image14]: ./new_test_images/turn-right-ahead.jpg "model architecture diagram"
 [image15]: ./new_test_images/dangerous-turn-to-the-left.jpg
+[image16]: ./report_images/11_5images_prediction.png
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -63,7 +64,7 @@ Here is an exploratory visualization of the data set.
 The code for this step is contained in the fourth code cell of the IPython notebook. <br/>
 ![alt text][image1]<br/>
 
-It is a bar chart showing how the data ...<br/>
+It is a bar chart showing how the data. See code cell 6....<br/>
 
 ![alt text][image2]<br/>
 
@@ -71,7 +72,7 @@ It is a bar chart showing how the data ...<br/>
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-The code for this step is contained in the fifth code cell of the IPython notebook.
+The code for this step is contained in the 7th and 8th cells of the IPython notebook.
 
 My preprocessing pipeline consists of the following steps:
 
@@ -107,7 +108,7 @@ With a simple min/max normalization I had (approx.) 1% better validation-accurac
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-The code for my final model is located in the seventh cell of the ipython notebook.
+The code for my final model is located in the 14th cell of the ipython notebook.
 
 My architecture is a deep convolutional neural network inspired by two existing architectures: one is LeNet[1], and the other is the one in Ciresan's paper[3]. Its number and types of layers come from LeNet, but the relatively huge number of filters in convolutional layers came for Ciresan. Another important property of Ciresan's network is that it is multi-column, but my network contains only a single column. It makes it a little less accurate, but the training and predition is much faster.
 
@@ -120,7 +121,7 @@ The final model consisted of the following layers: <br/>
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-The code for training the model is located in the eleventh cell of the ipython notebook.
+The code for training the model is located in the 15th to 19th cell of the ipython notebook.
 
 To train the model, I used AdamOptimizer, a batch size of 128, at most 30 epochs, a learn rate of 0.001. Another hyperparameter was the dropout rate which was 0.7 at every place where I used it. I have tried changing these parameters but it didn't really increase the accuracy. I saved the model which had the best validation accuracy.
 
@@ -130,9 +131,9 @@ The code for calculating the accuracy of the model is located in the twelfth cel
 
 My final model results were:
 
-training set accuracy of 0.999
-validation set accuracy of 0.983
-test set accuracy of 0.971
+training set accuracy of 0.994
+validation set accuracy of 0.978
+test set accuracy of 0.964
 
 I started out by creating an architecture which could clearly overfit the training data. (It converged to 1.0 training-accuracy in a couple of epochs, but the validation accuracy was much lower. Then I have added regulators until the overfitting was more-or-less eliminated. I added dropout operations between the fully connected layers. I also tried L2 regularization for the weights (in addition to the dropout), but it made the accuracy worse by a tiny amount. Then I have kept removing filters up to the point when the accuracy started decreasing.
 
@@ -160,16 +161,9 @@ This is a very blurry image, at first even I didn't know which sign is it. It mi
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+![alt text][image16] <br/>
 
-
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 2 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
