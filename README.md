@@ -27,6 +27,13 @@ The goals / steps of this project are the following:
 [image9]: ./report_images/09_model_architecture.jpg "model_architecture"
 [image10]: ./report_images/10_lenet.jpg "model architecture diagram"
 
+
+[image11]: ./new_test_images/end-of-all-speed-limits.jpg  
+[image12]: ./new_test_images/no-passing-2.jpg  
+[image13]: ./new_test_images/road-work.jpg  
+[image14]: ./new_test_images/turn-right-ahead.jpg "model architecture diagram"
+[image15]: ./new_test_images/dangerous-turn-to-the-left.jpg
+
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
@@ -135,10 +142,19 @@ I started out by creating an architecture which could clearly overfit the traini
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][image11] <br/>
+![alt text][image12] <br/>
 
-The first image might be difficult to classify because ...
+This picture is interesting because the perspective and rotation makes the car figures almost form a diagonal similar to the one in End of all speed limits sign.
+
+![alt text][image13] <br/>
+![alt text][image14] <br/>
+
+This picture might be hard to classify because it is from a strange perspective and another sign is hanging in to the picture.
+
+![alt text][image15] <br/>
+
+This is a very blurry image, at first even I didn't know which sign is it. It might be a photo or an artistic painting, of most likely the "Dangerous turn to the left" sign.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
