@@ -193,7 +193,7 @@ For the fourth image, the model is relatively sure (18%), and correct.<br/>
 ![alt text][image20] <br/><br/>
 
 For the fifth image, the model is very sure (95.16%) that it is a Bumpy road sign, but the correct answer is Dangerous curve to the left, which was not even in the top five guesses.<br/>
-![alt text][image21] <br/><br/>
+![alt text][image21] 
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
@@ -204,7 +204,7 @@ In the visualization of the activations of the first convolutional layer, I have
 ![alt text][image23] <br/><br/>
 ![alt text][image24] <br/><br/>
 
-Reference
+Reference<br/>
 [1] Lecun(1998): Gradient-Based Learning Applied to Document Recognition
 
 [2] Sermanet(2011): Traffic Sign Recognition with Multi-Scale Convolutional Networks
