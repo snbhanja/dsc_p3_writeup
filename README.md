@@ -60,12 +60,12 @@ I used the numpy library to calculate summary statistics of the traffic signs da
 #### 2. Include an exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. 
-The code for this step is contained in the fourth code cell of the IPython notebook.
-![alt text][image1]
+The code for this step is contained in the fourth code cell of the IPython notebook. <br/>
+![alt text][image1]<br/>
 
-It is a bar chart showing how the data ...
+It is a bar chart showing how the data ...<br/>
 
-![alt text][image2]
+![alt text][image2]<br/>
 
 ### Design and Test a Model Architecture
 
@@ -84,23 +84,23 @@ My preprocessing pipeline consists of the following steps:
 7. Horizontal flipping of images
 8. Blurring of images.
 
-The undistorted image as below,
-![alt text][image3]
+The undistorted image as below, <br/>
+![alt text][image3] <br/>
 
-After applying steps 1 to 4 above, the distorted image as below,
-![alt text][image4]
+After applying steps 1 to 4 above, the distorted image as below, <br/>
+![alt text][image4] <br/>
 
-Random noise:
-![alt text][image5]
+Random noise: <br/>
+![alt text][image5] <br/>
 
-Invert color:
-![alt text][image6]
+Invert color: <br/>
+![alt text][image6] <br/>
 
-Horizontal flip:
-![alt text][image7]
+Horizontal flip: <br/>
+![alt text][image7]  <br/>
 
-Blurred image:
-![alt text][image8]
+Blurred image: <br/>
+![alt text][image8] <br/>
 
 
 With a simple min/max normalization I had (approx.) 1% better validation-accuracies than without it. The percentile-based method gave an additional (approx.) 1% improvement over simple min/max normalization (this method was mentioned in [3]). 
@@ -111,11 +111,11 @@ The code for my final model is located in the seventh cell of the ipython notebo
 
 My architecture is a deep convolutional neural network inspired by two existing architectures: one is LeNet[1], and the other is the one in Ciresan's paper[3]. Its number and types of layers come from LeNet, but the relatively huge number of filters in convolutional layers came for Ciresan. Another important property of Ciresan's network is that it is multi-column, but my network contains only a single column. It makes it a little less accurate, but the training and predition is much faster.
 
-The model architecture diagram as below,
-![alt text][image10]
+The model architecture diagram as below, <br/>
+![alt text][image10] <br/>
 
-The final model consisted of the following layers:
-![alt text][image9]
+The final model consisted of the following layers: <br/>
+![alt text][image9] <br/>
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
@@ -140,17 +140,17 @@ I started out by creating an architecture which could clearly overfit the traini
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are five German traffic signs that I found on the web: <br/>
 
 ![alt text][image11] <br/>
 ![alt text][image12] <br/>
 
-This picture is interesting because the perspective and rotation makes the car figures almost form a diagonal similar to the one in End of all speed limits sign.
+This picture is interesting because the perspective and rotation makes the car figures almost form a diagonal similar to the one in End of all speed limits sign. <br/>
 
 ![alt text][image13] <br/>
 ![alt text][image14] <br/>
 
-This picture might be hard to classify because it is from a strange perspective and another sign is hanging in to the picture.
+This picture might be hard to classify because it is from a strange perspective and another sign is hanging in to the picture. <br/>
 
 ![alt text][image15] <br/>
 
